@@ -8,37 +8,24 @@ A Power BI dashboard project analyzing financial performance using the Superstor
 - Excel (Data Source)
 
 
-## 📁 Dataset
+The dashboard consists of:
 
-The project uses the **Superstore Dataset**, which contains fictional retail data including:
-
-- Orders
-- Returns
-- Sales
-- Profits
-- Customer segments
-- Regions & categories
+- ✅ KPI Cards: Total Sales, Total Profit, Profit Margin
+- 📅 Line Chart: Monthly Sales & Profit Trends
+- 🗺️ Map/Bar Charts: Sales by Region & State
+- 📊 Category/Segment Breakdown
+- 🔍 Interactive Filters: Region, Segment, Year
 
 ---
 
-## 🛠️ Project Steps
+## 📐 Key DAX Measures
 
-### 1. Data Import
-- Loaded Excel data into Power BI from the Superstore dataset.
-
-### 2. Data Cleaning
-- Removed nulls and duplicates
-- Standardized column names
-- Converted data types (e.g., dates, currency)
-
-### 3. Data Modeling
-- Created relationships between Orders, Returns, and Region tables
-- Built a star schema for efficient analysis
-
-### 4. Measures (DAX)
-Key measures created:
 ```DAX
 Total Sales = SUM(Orders[Sales])
 Total Profit = SUM(Orders[Profit])
 Profit Margin = DIVIDE([Total Profit], [Total Sales])
-
+Sales YOY Growth = 
+    DIVIDE(
+        [Total Sales] - CALCULATE([Total Sales], DATEADD(Orders[Order Date], -1, YEAR)),
+        CALCULATE([Total Sales], DATEADD(Orders[Order Date], -1, YEAR))
+    )
